@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import {NavLink, Route} from 'react-router';
 import Header from './routes/Header/Header'
 import FormView from './routes/Form/FormView';
@@ -22,10 +23,10 @@ class App extends Component {
     return (
       <>
       <Header formBtnClicked={this.formBtnClicked} isRegistering={this.state.isRegistering}/>
-      <FormView isRegistering={this.state.isRegistering}/>
+      <Route to='/login' render={props => (<FormView {...props}/>)} />
       </>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

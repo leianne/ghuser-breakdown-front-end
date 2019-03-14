@@ -21,7 +21,9 @@ function FormComponent(props) {
       <Typography component="h1" variant="h5">
         {props.isRegistering ? 'Sign Up' : 'Sign In'}
       </Typography>
-      <form>
+      <form >
+      {props.error && (<div className='error'>Username Taken</div>)}
+
         <FormControl margin="normal" required fullWidth>
           <InputLabel htmlFor="email">Username</InputLabel>
           <Input
@@ -50,7 +52,7 @@ function FormComponent(props) {
             <Input
               name="email"
               onChange={e => props.handleChanges(e)}
-              value={props.user.password}
+              value={props.user.email}
               type="email"
               id="email"
             />
@@ -60,8 +62,8 @@ function FormComponent(props) {
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me"
         />
-        <Button type="submit" fullWidth variant="contained" color="primary">
-          Sign in
+        <Button type="submit" onClick={(e) => props.formBtnSelected(e)} fullWidth variant="contained" color="primary">
+        {props.isRegistering ? 'Sign Up' : 'Sign In'}
         </Button>
       </form>
     </Paper>

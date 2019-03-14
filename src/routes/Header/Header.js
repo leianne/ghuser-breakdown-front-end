@@ -14,7 +14,7 @@ function Header(props) {
         <Toolbar id='toolbar'> 
           <Typography variant="h6" color="inherit" >
           <IconButton color="inherit" aria-label="Menu">
-          <i class="fab fa-github-alt"></i> 
+          <i className="fab fa-github-alt"></i> 
 
           </IconButton>
             Github User Breakdown

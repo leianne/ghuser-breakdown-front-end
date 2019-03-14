@@ -3,3 +3,11 @@
     margin: 20px auto;
     padding: 20px;
 }
+
+.error{
+    padding: 14px;
+    color: red;
+  text-align: center;
+  font: bold 21px 'Oswald',sans-serif;
+  text-transform: uppercase;
+}
