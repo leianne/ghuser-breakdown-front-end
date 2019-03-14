@@ -62,7 +62,7 @@ function FormComponent(props) {
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me"
         />
-        <Button type="submit" onClick={(e) => props.formBtnSelected(e)} fullWidth variant="contained" color="primary">
+        <Button type="submit" onClick={(e) => props.formBtnSelected(e, props.user)} fullWidth variant="contained" color="primary">
         {props.isRegistering ? 'Sign Up' : 'Sign In'}
         </Button>
       </form>

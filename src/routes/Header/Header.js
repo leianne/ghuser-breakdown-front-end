@@ -19,7 +19,7 @@ function Header(props) {
           </IconButton>
             Github User Breakdown
           </Typography>
-          <Button onClick={(e) => props.formBtnClicked(e)} color="inherit">{props.isRegistering ? 'Login' : 'Register'}</Button>
+          {props.isLoggedIn ? <Button onClick={(e) => props.logoutBtnClicked(e)} color="inherit">Log Out</Button> : <Button onClick={(e) => props.formBtnClicked(e)} color="inherit">{props.isRegistering ? 'Login' : 'Register'}</Button>}
         </Toolbar>
       </AppBar>
         </>
