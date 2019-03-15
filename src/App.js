@@ -14,7 +14,7 @@ class App extends Component {
     isRegistering: false,
     isLoggedIn: localStorage.getItem('jwt') ? true : false
     }
-
+    // HEADER BTN SELECTED
     headBtnSubmitted = (e) => {
       e.preventDefault();
       const val = e.target.textContent()
@@ -28,7 +28,7 @@ class App extends Component {
         })
       }
   }
-
+  // LOGIN/REG FORM SUBMITTED
   formBtnClicked = (e) => {
     e.preventDefault();
     console.log(e.target.innerText)
@@ -39,13 +39,14 @@ class App extends Component {
 
     }
   }
+  // LOGOUT BTN CLICKED
   logoutBtnClicked = (e) => {
     e.preventDefault();
     localStorage.removeItem('jwt');
     this.setState({isLoggedIn: false})
     this.props.history.push('/login');
   }
-
+  // REGISTER/LOGIN SELECTED WITH USER INFO
   formBtnSelected = (e, userInput) => {
     e.preventDefault();
     console.log(true)
@@ -61,6 +62,7 @@ class App extends Component {
             if(res.status === 201) {
                 this.setState({isLoggedIn: true})
                 localStorage.setItem('jwt', res.data.token)
+                localStorage.setItem('userId', res.data.newUser.id)
                 this.props.history.push('/dashboard')
                 console.log(res)
             }
@@ -81,12 +83,27 @@ class App extends Component {
         .catch(err => console.log(err))
     }
 }
+myAccountBtnClicked = (e) => {
+  const url = 'https://peaceful-fjord-80447.herokuapp.com/api/users'
+  e.preventDefault();
+  const id =localStorage.getItem('userId')
+  const token = localStorage.getItem('token');
+    const reqOptions = {
+        headers: {
+            Authorization: token
+        }
+    }
+
+  axios.get(`${url}/${id}`, reqOptions)
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
+}
   render() {
     console.log(this.state)
 
     return (
       <>
-      <Header headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
+      <Header myAccountBtnClicked={this.myAccountBtnClicked} headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
       <Route path='/login' render={props => (<FormView formBtnSelected={this.formBtnSelected} {...props} isRegistering={this.state.isRegistering}/>)} />
       <Route path='/dashboard' component={DashboardView} />
       </>

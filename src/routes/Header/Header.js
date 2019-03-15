@@ -19,7 +19,8 @@ function Header(props) {
           </IconButton>
             Github User Breakdown
           </Typography>
-          {props.isLoggedIn ? <Button onClick={(e) => props.logoutBtnClicked(e)} color="inherit">Log Out</Button> : <Button onClick={(e) => props.formBtnClicked(e)} color="inherit">{props.isRegistering ? 'Login' : 'Register'}</Button>}
+    
+          {props.isLoggedIn ? ( <div><Button onClick={(e) => props.myAccountBtnClicked(e)} color="inherit">My Account</Button> <Button onClick={(e) => props.logoutBtnClicked(e)} color="inherit">Log Out</Button> </div>) : <Button onClick={(e) => props.formBtnClicked(e)} color="inherit">{props.isRegistering ? 'Login' : 'Register'}</Button>}
         </Toolbar>
       </AppBar>
         </>
