@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 
-function DashboardComponent(props) {
+function SearchComponent(props) {
   return (
     <div className="searchContainer">
       <form onSubmit={(e) => props.handleSubmit(e)}>
@@ -18,8 +18,9 @@ function DashboardComponent(props) {
         />
         </div>
       </form>
+      {props.isLoading && 'Loading'}
     </div>
   );
 }
 
-export default DashboardComponent;
+export default SearchComponent;

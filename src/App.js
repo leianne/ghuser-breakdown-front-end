@@ -14,6 +14,21 @@ class App extends Component {
     isRegistering: false,
     isLoggedIn: false
     }
+
+    headBtnSubmitted = (e) => {
+      e.preventDefault();
+      const val = e.target.textContent()
+      if(val === 'Login'){
+        this.setState({
+          isRegistering: true
+        })
+      } else {
+        this.setState({
+          isRegistering: false
+        })
+      }
+  }
+
   formBtnClicked = (e) => {
     e.preventDefault();
     console.log(e.target.innerText)
@@ -69,7 +84,7 @@ class App extends Component {
   render() {
     return (
       <>
-      <Header logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
+      <Header headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
       <Route path='/login' render={props => (<FormView formBtnSelected={this.formBtnSelected} {...props} isRegistering={this.state.isRegistering}/>)} />
       <Route path='/dashboard' component={DashboardView} />
       </>

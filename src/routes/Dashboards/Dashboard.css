@@ -2,3 +2,14 @@
     display: flex;
     justify-content: center;
 }
+.userContent {
+    display: flex;
+    justify-content: center;
+    
+}
+.userCard{
+    width: 25%;
+}
+.userImg {
+    height: 350px;
+}
