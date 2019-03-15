@@ -3,6 +3,7 @@ import RequiresAuth from '../Auth/RequiresAuth';
 import axios from 'axios';
 import SearchComponent from './SearchComponent';
 import UserInfoComponent from './UserInfoComponent';
+import UserDataComponent from './UserDataComponent';
 import './Dashboard.css'
 class DashboardView extends Component {
     // STATE
@@ -54,6 +55,7 @@ class DashboardView extends Component {
             <SearchComponent isLoading={this.state.isLoading}search={this.state.search} handleChanges={this.handleChanges} handleSubmit={this.handleSubmit}/>
             <div className='userContent'>
                 <UserInfoComponent handleGHSubmitted={this.handleGHSubmitted} userInfo={this.state.userInfo}/>
+                <UserDataComponent data={this.state.data} userInfo={this.state.userInfo} />
             </div>
             </>
         )

@@ -5,11 +5,15 @@
 .userContent {
     display: flex;
     justify-content: center;
-    
+    margin-top: 30px;
 }
 .userCard{
     width: 25%;
+    margin-right: 30px;
 }
 .userImg {
     height: 350px;
+}
+.userData {
+    width: 50%;
 }
