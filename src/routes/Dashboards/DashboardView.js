@@ -33,7 +33,8 @@ class DashboardView extends Component {
                     ...this.state,
                     isLoading: false,
                     data: res.data.data,
-                    userInfo: res.data.userInfo
+                    userInfo: res.data.userInfo,
+                    langs: [res.data.langs]
                 })
                 console.log(this.state)
             })
@@ -55,7 +56,7 @@ class DashboardView extends Component {
             <SearchComponent isLoading={this.state.isLoading}search={this.state.search} handleChanges={this.handleChanges} handleSubmit={this.handleSubmit}/>
             <div className='userContent'>
                 <UserInfoComponent handleGHSubmitted={this.handleGHSubmitted} userInfo={this.state.userInfo}/>
-                <UserDataComponent data={this.state.data} userInfo={this.state.userInfo} />
+                <UserDataComponent langs={this.state.langs} data={this.state.data} userInfo={this.state.userInfo} />
             </div>
             </>
         )

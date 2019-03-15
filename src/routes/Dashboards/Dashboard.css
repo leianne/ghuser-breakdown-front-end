@@ -17,3 +17,16 @@
 .userData {
     width: 50%;
 }
+#lineChart {
+    width: 500px;
+}
+#Sunday {
+    width: 50px
+}
+
+.langInfo {
+    display: flex;
+}
+#langInfo--lang {
+    margin-right: 10px;
+}

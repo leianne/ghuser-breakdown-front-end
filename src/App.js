@@ -12,7 +12,7 @@ import './App.css';
 class App extends Component {
   state = {
     isRegistering: false,
-    isLoggedIn: false
+    isLoggedIn: localStorage.getItem('jwt') ? true : false
     }
 
     headBtnSubmitted = (e) => {
@@ -82,6 +82,8 @@ class App extends Component {
     }
 }
   render() {
+    console.log(this.state)
+
     return (
       <>
       <Header headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
