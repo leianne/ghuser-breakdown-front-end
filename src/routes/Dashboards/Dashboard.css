@@ -30,3 +30,17 @@
 #langInfo--lang {
     margin-right: 10px;
 }
+.loader  {
+    display: flex;
+    justify-content: center;
+}
+.userCard {
+    width: 300px;
+    margin: 10px;
+}
+.usersContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

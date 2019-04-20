@@ -3,11 +3,12 @@ import { withRouter } from 'react-router-dom'
 import {NavLink, Route} from 'react-router';
 import Header from './routes/Header/Header'
 import axios from 'axios';
-
-import DashboardView from './routes/Dashboards/DashboardView';
-
-import FormView from './routes/Form/FormView';
+import SearchView from './routes/Dashboards/SearchView';
+import { NotificationManager } from 'react-notifications';
+import LoginView from './routes/Login/LoginView';
+import GHBreakdownView from './routes/Dashboards/GH/GHBreakdownView'
 import './App.css';
+import 'react-notifications/lib/notifications.css';
 
 class App extends Component {
   state = {
@@ -51,12 +52,10 @@ class App extends Component {
     e.preventDefault();
     console.log(true)
     const selected = e.target.innerText.toLowerCase();
-    const url = 'https://peaceful-fjord-80447.herokuapp.com/api/auth'
+    const url = 'http://localhost:5000/api/auth'
     const user = userInput.user
-    console.log(user)
+    console.log(selected)
     if(selected === 'sign up'){
-      delete user.email
-        console.log(user)
         axios.post(`${url}/register`, user)
         .then(res => {
             if(res.status === 201) {
@@ -67,7 +66,10 @@ class App extends Component {
                 console.log(res)
             }
         })
-        .catch(err => this.setState({error: true}))
+        .catch(err => {
+          console.log(err)
+          NotificationManager.error('Username taken', 'Please try  again', 5000);
+        })
     } else {
       delete user.email
       axios.post(`${url}/login`, user)
@@ -97,15 +99,24 @@ myAccountBtnClicked = (e) => {
   axios.get(`${url}/${id}`, reqOptions)
   .then(res => console.log(res))
   .catch(err => console.log(err))
-}
+  }
+  userSelected = (e, user) => {
+    e.preventDefault();
+    this.setState({
+        ...this.state,
+        user: user
+    })
+    window.location.href = `/ghdashboard/${user.login}`
+  }
   render() {
     console.log(this.state)
 
     return (
       <>
       <Header myAccountBtnClicked={this.myAccountBtnClicked} headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
-      <Route path='/login' render={props => (<FormView formBtnSelected={this.formBtnSelected} {...props} isRegistering={this.state.isRegistering}/>)} />
-      <Route path='/dashboard' component={DashboardView} />
+      <Route path='/login' render={props => (<LoginView formBtnSelected={this.formBtnSelected} {...props} isRegistering={this.state.isRegistering}/>)} />
+      <Route path='/search' render={props => (<SearchView userSelected={this.userSelected}/>)} />
+      <Route path='/ghdashboard/:user' render={props => (<GHBreakdownView {...props} user={this.state.user}/>)} />
       </>
     );
   }

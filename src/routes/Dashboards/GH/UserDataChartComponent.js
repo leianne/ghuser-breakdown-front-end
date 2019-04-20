@@ -70,7 +70,7 @@ class UserDataChartComponent extends React.Component {
           <div>
             <Tabs    
 >
-              <Tab onClick={(e) => this.tabSelected(e)} style={{ minWidth: 50 }} label="Sunday" />
+              <Tab onClick={(e) => this.tabSelected(e)} value={1} style={{ minWidth: 50 }} label="Sunday" />
               <Tab onClick={(e) => this.tabSelected(e)} style={{ minWidth: 50 }}  label="Monday" />
               <Tab onClick={(e) => this.tabSelected(e)} style={{ minWidth: 50 }}  label="Tuesday" />
               <Tab onClick={(e) => this.tabSelected(e)} style={{ minWidth: 50 }}  label="Wednesday" />

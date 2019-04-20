@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 function UserInfoComponent(props) {
-  if (props.userInfo) {
+  if (props.user) {
     const { login, avatar_url, email, bio } = props.userInfo;
     return (
       <>
@@ -39,8 +39,6 @@ function UserInfoComponent(props) {
         </Card>
       </>
     );
-  } else {
-    return <h3>Enter a Github Username</h3>;
   }
 }
 

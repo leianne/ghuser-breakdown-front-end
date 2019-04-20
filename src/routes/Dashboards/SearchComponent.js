@@ -18,7 +18,6 @@ function SearchComponent(props) {
         />
         </div>
       </form>
-      {props.isLoading && 'Loading'}
     </div>
   );
 }
