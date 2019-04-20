@@ -106,7 +106,7 @@ myAccountBtnClicked = (e) => {
         ...this.state,
         user: user
     })
-    window.location.href = `/ghdashboard/${user.login}`
+    window.location.href = `/ghdashboard/search=${user.login}`
   }
   render() {
     console.log(this.state)

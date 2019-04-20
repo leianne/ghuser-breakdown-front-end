@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 
 function UserInfoComponent(props) {
   if (props.user) {
-    const { login, avatar_url, email, bio } = props.userInfo;
+    const { login, avatar_url, email, bio } = props.user;
     return (
       <>
         <Card className="userCard">
