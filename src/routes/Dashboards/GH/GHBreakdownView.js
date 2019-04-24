@@ -3,7 +3,7 @@ import UserInfoComponent from  './UserInfoComponent';
 import queryString from 'query-string';
 import axios  from 'axios';
 import Loader from 'react-loader-spinner'
-const  baseURL = 'http://localhost:5000/api/github/search/commits';
+const  baseURL = 'http://localhost:5000/api/github/search';
 
 class GHBreakdownView extends Component {
     state  =  {
@@ -13,8 +13,11 @@ class GHBreakdownView extends Component {
         console.log(this.props);
         const parsed = queryString.parse(this.props.location.pathname);
         const user = {username: parsed['/ghdashboard/search']}
-
-        axios.post(baseURL,  user)
+        console.log(user)
+        axios.post(`${baseURL}/user`, user)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+        axios.post(`${baseURL}/commits`,  user)
             .then(res => {
                 this.setState({
                     ...this.state,
