@@ -2,6 +2,8 @@ import React from "react";
 import { LineChart } from "react-easy-chart";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import axios  from 'axios';
+const  baseURL = 'http://localhost:5000/api/github/search';
 
 class UserDataChartComponent extends React.Component {
   state = {
@@ -13,6 +15,9 @@ class UserDataChartComponent extends React.Component {
     Friday: [],
     Saturday: []
   };
+  componentWillReceiveProps() {
+    console.log(this.props)
+  }
   componentDidMount() {
     const Sunday = [];
     const Monday = [];
@@ -21,39 +26,52 @@ class UserDataChartComponent extends React.Component {
     const Thursday = [];
     const Friday = [];
     const Saturday = [];
-
-    Object.entries(this.props.data).forEach(([el, key]) => {
-      const { Day, Hour, Commits } = key;
-      const chart = { x: parseInt(Hour) + 1, y: parseInt(Commits) };
-
-      if (Day === "0") {
-        Sunday.push(chart);
-      } else if (Day === "1") {
-        Monday.push(chart);
-      } else if (Day === "2") {
-        Tuesday.push(chart);
-      } else if (Day === "3") {
-        Wednesday.push(chart);
-      } else if (Day === "4") {
-        Thursday.push(chart);
-      } else if (Day === "5") {
-        Friday.push(chart);
-      } else if (Day === "6") {
-        Saturday.push(chart);
-      }
-      return Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday;
-    });
-    this.setState({
-      ...this.state,
-      Sunday: Sunday,
-      Monday: Monday,
-      Tuesday: Tuesday,
-      Wednesday: Wednesday,
-      Thursday: Thursday,
-      Friday: Friday,
-      Saturday: Saturday,
-      selected: Wednesday
-    });
+    console.log(this.props)
+    axios.post(`${baseURL}/commits`,  )
+    .then(res => {
+        console.log(res)
+        this.setState({
+            ...this.state,
+            userCommits: res.data.data
+        })
+    })
+    .catch(err =>  console.log(err))
+    if(this.props.data) {
+      console.log(this.props.data)
+      Object.entries(this.props.data).forEach(([el, key]) => {
+        const { Day, Hour, Commits } = key;
+        const chart = { x: parseInt(Hour) + 1, y: parseInt(Commits) };
+  
+        if (Day === "0") {
+          Sunday.push(chart);
+        } else if (Day === "1") {
+          Monday.push(chart);
+        } else if (Day === "2") {
+          Tuesday.push(chart);
+        } else if (Day === "3") {
+          Wednesday.push(chart);
+        } else if (Day === "4") {
+          Thursday.push(chart);
+        } else if (Day === "5") {
+          Friday.push(chart);
+        } else if (Day === "6") {
+          Saturday.push(chart);
+        }
+        return Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday;
+      });
+      this.setState({
+        ...this.state,
+        Sunday: Sunday,
+        Monday: Monday,
+        Tuesday: Tuesday,
+        Wednesday: Wednesday,
+        Thursday: Thursday,
+        Friday: Friday,
+        Saturday: Saturday,
+        selected: Wednesday
+      });
+    }
+    console.log(this.state)
   }
   tabSelected = (e) => {
       e.preventDefault();
@@ -63,7 +81,9 @@ class UserDataChartComponent extends React.Component {
       })
   }
   render() {
-    console.log(this.state);
+    console.log(!this.props.data);
+    console.log(this.state)
+
     if (this.state.selected) {
       return (
         <>
