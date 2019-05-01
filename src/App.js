@@ -102,15 +102,14 @@ myAccountBtnClicked = (e) => {
   }
   userSelected = (e, user) => {
     e.preventDefault();
+    console.log(user)
     this.setState({
         ...this.state,
         user: user
     })
-    window.location.href = `/ghdashboard/${user.login}`
+    window.location.href=`/ghdashboard/search=${user.login}`
   }
   render() {
-    console.log(this.state)
-
     return (
       <>
       <Header myAccountBtnClicked={this.myAccountBtnClicked} headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
