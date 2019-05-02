@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom'
 import {NavLink, Route} from 'react-router';
 import Header from './routes/Header/Header'
 import axios from 'axios';
+import { connect } from 'react-redux';
+import  { loginUser } from './store/actions'
 import SearchView from './routes/Dashboards/SearchView';
 import { NotificationManager } from 'react-notifications';
 import LoginView from './routes/Login/LoginView';
@@ -72,17 +74,7 @@ class App extends Component {
         })
     } else {
       delete user.email
-      axios.post(`${url}/login`, user)
-        .then(res => {
-          if(res.status === 202){
-            this.setState({isLoggedIn: true})
-            localStorage.setItem('jwt', res.data.token)
-            this.props.history.push('/dashboard')
-            console.log(res)
-
-          }
-        })
-        .catch(err => console.log(err))
+        this.props.loginUser(user)
     }
 }
 myAccountBtnClicked = (e) => {
@@ -110,6 +102,7 @@ myAccountBtnClicked = (e) => {
     window.location.href=`/ghdashboard/search=${user.login}`
   }
   render() {
+    console.log('PROpS' + this.props.loginUser)
     return (
       <>
       <Header myAccountBtnClicked={this.myAccountBtnClicked} headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
@@ -121,4 +114,10 @@ myAccountBtnClicked = (e) => {
   }
 }
 
-export default withRouter(App);
+const mapStateToProps = state => {
+  console.log('MSTP ' + state.login)
+  return {
+
+  }
+}
+export default connect(mapStateToProps, {loginUser})(withRouter(App));
