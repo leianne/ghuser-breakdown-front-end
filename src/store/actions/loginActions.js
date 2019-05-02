@@ -8,12 +8,10 @@ export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 export const loginUser = userInfo => dispatch => {
     dispatch({type: LOGIN_USER_START})
         axios.post(`${baseURL}/login`, userInfo)
-            console.log(userInfo)
             .then(res => {
-                console.log(res)
                 dispatch({
                     type: LOGIN_USER_SUCCESS,
-                    payload: res.data.token
+                    payload: res.data
                 })
             })
             .catch(err => {

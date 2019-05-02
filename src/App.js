@@ -4,7 +4,7 @@ import {NavLink, Route} from 'react-router';
 import Header from './routes/Header/Header'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import  { loginUser } from './store/actions'
+import  { loginUser, registerUser } from './store/actions'
 import SearchView from './routes/Dashboards/SearchView';
 import { NotificationManager } from 'react-notifications';
 import LoginView from './routes/Login/LoginView';
@@ -52,26 +52,10 @@ class App extends Component {
   // REGISTER/LOGIN SELECTED WITH USER INFO
   formBtnSelected = (e, userInput) => {
     e.preventDefault();
-    console.log(true)
     const selected = e.target.innerText.toLowerCase();
-    const url = 'http://localhost:5000/api/auth'
     const user = userInput.user
-    console.log(selected)
     if(selected === 'sign up'){
-        axios.post(`${url}/register`, user)
-        .then(res => {
-            if(res.status === 201) {
-                this.setState({isLoggedIn: true})
-                localStorage.setItem('jwt', res.data.token)
-                localStorage.setItem('userId', res.data.newUser.id)
-                this.props.history.push('/dashboard')
-                console.log(res)
-            }
-        })
-        .catch(err => {
-          console.log(err)
-          NotificationManager.error('Username taken', 'Please try  again', 5000);
-        })
+       this.props.registerUser(user)
     } else {
       delete user.email
         this.props.loginUser(user)
@@ -120,4 +104,4 @@ const mapStateToProps = state => {
 
   }
 }
-export default connect(mapStateToProps, {loginUser})(withRouter(App));
+export default connect(mapStateToProps, {loginUser, registerUser})(withRouter(App));
