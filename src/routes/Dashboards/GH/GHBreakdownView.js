@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserInfoComponent from  './UserInfoComponent';
 import queryString from 'query-string';
 import axios  from 'axios';
+import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
 import UserDataChartComponent from './UserDataChartComponent';
 const  baseURL = 'http://localhost:5000/api/github/search';
@@ -42,4 +43,10 @@ class GHBreakdownView extends Component {
     }
 }
 
-export default GHBreakdownView;
+const mapStateToProps = state => {
+    console.log(state)
+    return {
+
+    }
+}
+export default connect(mapStateToProps, {})(GHBreakdownView);

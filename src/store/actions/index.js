@@ -11,3 +11,8 @@ export {
     REGISTER_USER_FAILURE,
     registerUser
 } from './registerActions';
+
+export {
+    USER_SEARCH,
+    userSearch
+} from './searchActions';

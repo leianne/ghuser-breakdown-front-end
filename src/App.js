@@ -4,7 +4,7 @@ import {NavLink, Route} from 'react-router';
 import Header from './routes/Header/Header'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import  { loginUser, registerUser } from './store/actions'
+import  { loginUser, registerUser, userSearch } from './store/actions'
 import SearchView from './routes/Dashboards/SearchView';
 import { NotificationManager } from 'react-notifications';
 import LoginView from './routes/Login/LoginView';
@@ -78,30 +78,25 @@ myAccountBtnClicked = (e) => {
   }
   userSelected = (e, user) => {
     e.preventDefault();
-    console.log(user)
-    this.setState({
-        ...this.state,
-        user: user
-    })
-    window.location.href=`/ghdashboard/search=${user.login}`
+    this.props.userSearch(user)
   }
+
   render() {
-    console.log('PROpS' + this.props.loginUser)
     return (
       <>
       <Header myAccountBtnClicked={this.myAccountBtnClicked} headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
       <Route path='/login' render={props => (<LoginView formBtnSelected={this.formBtnSelected} {...props} isRegistering={this.state.isRegistering}/>)} />
       <Route path='/search' render={props => (<SearchView userSelected={this.userSelected}/>)} />
-      <Route path='/ghdashboard/:user' render={props => (<GHBreakdownView {...props} user={this.state.user}/>)} />
+      <Route path='/ghdashboard' render={props => (<GHBreakdownView {...props} user={this.state.user}/>)} />
       </>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log('MSTP ' + state.login)
+  console.log(state.login)
   return {
 
   }
 }
-export default connect(mapStateToProps, {loginUser, registerUser})(withRouter(App));
+export default connect(mapStateToProps, {loginUser, registerUser, userSearch})(withRouter(App));

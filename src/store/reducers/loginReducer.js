@@ -19,8 +19,7 @@ const loginUser = (state = initialState, action) => {
                 isLoggingIn: true,
             }
         case LOGIN_USER_SUCCESS:
-            localStorage.setItem('jwt', action.payload)
-            window.location.href = '/search'
+            localStorage.setItem('jwt', action.payload);
             console.log(action.payload)
             return {
                 ...state,

@@ -20,7 +20,6 @@ const registerReducer = (state = initialState, action) => {
             }
         case REGISTER_USER_SUCCESS:
             localStorage.setItem('jwt', action.payload.token)
-            window.location.href = '/search'
             return {
                 ...state,
                 isRegistering: false,
