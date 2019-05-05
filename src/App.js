@@ -78,6 +78,7 @@ myAccountBtnClicked = (e) => {
   }
   userSelected = (e, user) => {
     e.preventDefault();
+    console.log(user)
     this.props.userSearch(user)
   }
 
@@ -94,7 +95,7 @@ myAccountBtnClicked = (e) => {
 }
 
 const mapStateToProps = state => {
-  console.log(state.login)
+  console.log(state)
   return {
 
   }

@@ -9,4 +9,5 @@ const rootReducer = combineReducers({
     search: searchReducer
 });
 
+console.log()
 export default rootReducer;

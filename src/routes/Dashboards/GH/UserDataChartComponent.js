@@ -3,7 +3,7 @@ import { LineChart } from "react-easy-chart";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import axios  from 'axios';
-const  baseURL = 'http://localhost:5000/api/github/search';
+const  baseURL = process.env.BACKEND_API || 'http://localhost:5000/api/github/search';
 
 class UserDataChartComponent extends React.Component {
   state = {

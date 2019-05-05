@@ -5,7 +5,7 @@ import axios  from 'axios';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
 import UserDataChartComponent from './UserDataChartComponent';
-const  baseURL = 'http://localhost:5000/api/github/search';
+const  baseURL =  process.env.BACKEND_API || 'http://localhost:5000/api/github/search'
 
 class GHBreakdownView extends Component {
     state  =  {
@@ -23,9 +23,9 @@ class GHBreakdownView extends Component {
                 userInfo: res.data.userInfo
             })})
             .catch(err => console.log(err))
-        axios.post(`${baseURL}/commits`, user)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        // axios.post(`${baseURL}/commits`, user)
+        // .then(res => console.log(res))
+        // .catch(err => console.log(err))
     }
     render() {
         if(this.state.userInfo.login === ''){

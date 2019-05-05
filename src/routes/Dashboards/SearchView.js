@@ -6,7 +6,7 @@ import SearchComponent from './SearchComponent';
 import {NotificationContainer, NotificationManager } from 'react-notifications';
 import UsersSearch from './UsersSearch';
 import './Dashboard.css'
-
+const baseURL =  process.env.BACKEND_API || 'http://localhost:5000/api/github/search';
 class SearchView extends Component {
     // STATE
     state = {
@@ -24,7 +24,7 @@ class SearchView extends Component {
     }
     // HANDLE SUBMIT - for fuzzy searchw
     handleSubmit = (e) => {
-        const url = 'http://localhost:5000/api/github/search/users'
+        const url = `${baseURL}/users`
         e.preventDefault();
         const search = this.state.search
         this.setState({ 

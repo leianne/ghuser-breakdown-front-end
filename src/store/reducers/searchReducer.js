@@ -9,7 +9,7 @@ const initialState = {
 const searchReducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_SEARCH:
-            window.location.href = '/ghdashboard'
+        console.log(state)
             return {
                 ...state,
                 user: action.payload
@@ -18,5 +18,6 @@ const searchReducer = (state = initialState, action) => {
             return state
     }
 }
+console.log(initialState)
 
 export default searchReducer;

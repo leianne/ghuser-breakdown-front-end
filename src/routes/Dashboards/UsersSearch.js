@@ -31,7 +31,7 @@ function UsersSearch(props) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary" onClick={(e) => props.userSelected(e, user)}>
+                  <Button size="small" color="primary" href={`/ghdashboard/search=${user.login}`} >
                     View  More
                   </Button>
                 </CardActions>
