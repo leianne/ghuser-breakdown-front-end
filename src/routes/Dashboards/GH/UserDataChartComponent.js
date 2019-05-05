@@ -27,15 +27,6 @@ class UserDataChartComponent extends React.Component {
     const Friday = [];
     const Saturday = [];
     console.log(this.props)
-    axios.post(`${baseURL}/commits`,  )
-    .then(res => {
-        console.log(res)
-        this.setState({
-            ...this.state,
-            userCommits: res.data.data
-        })
-    })
-    .catch(err =>  console.log(err))
     if(this.props.data) {
       console.log(this.props.data)
       Object.entries(this.props.data).forEach(([el, key]) => {

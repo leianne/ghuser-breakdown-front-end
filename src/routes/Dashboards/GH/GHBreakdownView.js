@@ -9,7 +9,8 @@ const  baseURL =  process.env.BACKEND_API || 'http://localhost:5000/api/github/s
 
 class GHBreakdownView extends Component {
     state  =  {
-        userInfo:  {}
+        userInfo:  {},
+        commits: {}
     }
     componentDidMount() {
         const parsed = queryString.parse(this.props.location.pathname);
@@ -23,11 +24,15 @@ class GHBreakdownView extends Component {
                 userInfo: res.data.userInfo
             })})
             .catch(err => console.log(err))
-        // axios.post(`${baseURL}/commits`, user)
-        // .then(res => console.log(res))
-        // .catch(err => console.log(err))
+        axios.post(`${baseURL}/commits`, user)
+        .then(res => this.setState({
+            ...this.state,
+            commits: res.data.data
+        }))
+        .catch(err => console.log(err))
     }
     render() {
+        console.log(this.state)
         if(this.state.userInfo.login === ''){
             return (
                 <div className='loader'><Loader type="ThreeDots" color="#4051B5" height={80} width={80} /></div>
@@ -36,17 +41,12 @@ class GHBreakdownView extends Component {
             return (
                 <>
                     <UserInfoComponent  user={this.state.userInfo}/>
-                    {/* <UserDataChartComponent user={}/> */}
+                    {Object.keys(this.state.commits).length > 0 &&<UserDataChartComponent data={this.state.commits}/>}
                 </>
             )
         }
     }
 }
 
-const mapStateToProps = state => {
-    console.log(state)
-    return {
 
-    }
-}
-export default connect(mapStateToProps, {})(GHBreakdownView);
+export default GHBreakdownView;
