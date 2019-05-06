@@ -1,6 +1,5 @@
 import React from 'react';
 import LoginComponent from './LoginComponent';
-import {NotificationContainer } from 'react-notifications';
 import './LoginStyles.css';
 
 class LoginView extends React.Component {
@@ -27,7 +26,6 @@ class LoginView extends React.Component {
     render() {
         return (
             <>
-                <NotificationContainer/>
                 <LoginComponent user={this.state} formBtnSelected={this.props.formBtnSelected} isRegistering={this.props.isRegistering} handleChanges={this.handleChanges} error={this.state.error}/>
             </>
         )

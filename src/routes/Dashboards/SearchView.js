@@ -3,10 +3,9 @@ import RequiresAuth from '../Auth/RequiresAuth';
 import axios from 'axios';
 import Loader from 'react-loader-spinner'
 import SearchComponent from './SearchComponent';
-import {NotificationContainer, NotificationManager } from 'react-notifications';
 import UsersSearch from './UsersSearch';
 import './Dashboard.css'
-const baseURL =  process.env.BACKEND_API || 'http://localhost:5000/api/github/search';
+const baseURL =  process.env.BACKEND_API || 'http://localhost:5000/';
 class SearchView extends Component {
     // STATE
     state = {
@@ -14,7 +13,6 @@ class SearchView extends Component {
         users:  []
     }
     componentDidMount () {
-        NotificationManager.success('Thanks for coming back', 'Welcome', 5000);
     }
     // HANDLE CHANGES FOR SEARCH BAR
     handleChanges = (e) => {
@@ -24,23 +22,20 @@ class SearchView extends Component {
     }
     // HANDLE SUBMIT - for fuzzy searchw
     handleSubmit = (e) => {
-        const url = `${baseURL}/users`
+        const url = `${baseURL}api/github/search/users`
         e.preventDefault();
         const search = this.state.search
         this.setState({ 
             isLoading: true
         })
-        console.log(search)
         if(search !== ''){
             axios.post(`${url}/${search}`)
             .then(res => {
-                console.log(res)
                 this.setState({
                     ...this.state,
                     isLoading: false,
                     users: res.data.users,
                 })
-                console.log(this.state)
             })
             .catch(err => console.log(err))
         }
@@ -48,7 +43,6 @@ class SearchView extends Component {
     render() {
         return (
             <>
-                <NotificationContainer/>
                 <SearchComponent isLoading={this.state.isLoading} search={this.state.search} handleChanges={this.handleChanges} handleSubmit={this.handleSubmit}/>
                 {this.state.isLoading && <div className='loader'><Loader type="ThreeDots" color="#4051B5" height={80} width={80} /></div>}  
                 <div className='usersContainer'>

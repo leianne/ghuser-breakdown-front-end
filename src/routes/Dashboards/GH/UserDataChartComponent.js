@@ -1,13 +1,7 @@
 import React from "react";
-// import { LineChart, ScatterplotChart } from "react-easy-chart";
-// import ReactChartkick, { LineChart, PieChart } from 'react-chartkick';
-// import Chart from 'chart.js';
 import CanvasJSReact from '../../../canvasjs-2.3.1/canvasjs.react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import axios  from 'axios';
-const  baseURL = process.env.BACKEND_API || 'http://localhost:5000/api/github/search';
-
 const CanvasJS = CanvasJSReact.CanvasJS
 const CanvasJSChart = CanvasJSReact.CanvasJSChart
 
@@ -22,9 +16,6 @@ class UserDataChartComponent extends React.Component {
     Friday: [],
     Saturday: []
   };
-  componentDidUpdate() {
-
-  }
   componentDidMount() {
     const Sunday = [];
     const Monday = [];
@@ -33,13 +24,10 @@ class UserDataChartComponent extends React.Component {
     const Thursday = [];
     const Friday = [];
     const Saturday = [];
-    console.log(this.props)
     if(this.props.data) {
-      console.log(this.props.data)
       Object.entries(this.props.data).forEach(([el, key]) => {
         const { Day, Hour, Commits } = key;
         const chart = { x: parseInt(Hour) + 1, y: parseInt(Commits) };
-  
         if (Day === "0") {
           Sunday.push(chart);
         } else if (Day === "1") {
@@ -68,8 +56,7 @@ class UserDataChartComponent extends React.Component {
         Saturday: Saturday,
         selected: Tuesday
       });
-    }
-    
+    }    
   }
   tabSelected = (e) => {
       e.preventDefault();
@@ -100,19 +87,15 @@ class UserDataChartComponent extends React.Component {
         }]
       },
       data: [{
-        
         type: "spline",
         dataPoints: this.state.selected
       }]
     }
-    
     if (this.state.selected) {
-    
       return (
         <div className='chartContainer'>
           <div>
-            <Tabs    
->
+            <Tabs>
               <Tab onClick={(e) => this.tabSelected(e)} value={1} style={{ minWidth: 50 }} label="Sunday" />
               <Tab onClick={(e) => this.tabSelected(e)} style={{ minWidth: 50 }}  label="Monday" />
               <Tab onClick={(e) => this.tabSelected(e)} style={{ minWidth: 50 }}  label="Tuesday" />
@@ -122,11 +105,7 @@ class UserDataChartComponent extends React.Component {
               <Tab onClick={(e) => this.tabSelected(e)} style={{ minWidth: 50 }} label="Saturday" />
             </Tabs>
           </div>
-          
-          <CanvasJSChart options = {options} />
-
-          {/* <LineChart data={[[new Date(), 5], ["2017-01-01 00:00:00 UTC", 7], [new Date(), 5], ["2017-01-01 00:10:00 UTC", 7]]}/> */}
-        
+          <CanvasJSChart width='100px' height='100px' options = {options} />
         </div>
       );
     } else {

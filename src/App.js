@@ -6,11 +6,9 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import  { loginUser, registerUser, userSearch } from './store/actions'
 import SearchView from './routes/Dashboards/SearchView';
-import { NotificationManager } from 'react-notifications';
 import LoginView from './routes/Login/LoginView';
 import GHBreakdownView from './routes/Dashboards/GH/GHBreakdownView'
 import './App.css';
-import 'react-notifications/lib/notifications.css';
 
 class App extends Component {
   state = {
@@ -34,7 +32,6 @@ class App extends Component {
   // LOGIN/REG FORM SUBMITTED
   formBtnClicked = (e) => {
     e.preventDefault();
-    console.log(e.target.innerText)
     if(e.target.innerText.toLowerCase() === 'register'){
         this.setState({ isRegistering: true})
     } else {
@@ -61,31 +58,11 @@ class App extends Component {
         this.props.loginUser(user)
     }
 }
-myAccountBtnClicked = (e) => {
-  const url = 'https://peaceful-fjord-80447.herokuapp.com/api/users'
-  e.preventDefault();
-  const id =localStorage.getItem('userId')
-  const token = localStorage.getItem('token');
-    const reqOptions = {
-        headers: {
-            Authorization: token
-        }
-    }
-
-  axios.get(`${url}/${id}`, reqOptions)
-  .then(res => console.log(res))
-  .catch(err => console.log(err))
-  }
-  userSelected = (e, user) => {
-    e.preventDefault();
-    console.log(user)
-    this.props.userSearch(user)
-  }
 
   render() {
     return (
       <>
-      <Header myAccountBtnClicked={this.myAccountBtnClicked} headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
+      <Header  headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
       <Route path='/login' render={props => (<LoginView formBtnSelected={this.formBtnSelected} {...props} isRegistering={this.state.isRegistering}/>)} />
       <Route exact path='/' render={props => (<SearchView userSelected={this.userSelected}/>)} />
       <Route path='/ghdashboard' render={props => (<GHBreakdownView {...props} user={this.state.user}/>)} />
@@ -94,10 +71,4 @@ myAccountBtnClicked = (e) => {
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state)
-  return {
-
-  }
-}
-export default connect(mapStateToProps, {loginUser, registerUser, userSearch})(withRouter(App));
+export default connect(null, {loginUser, registerUser, userSearch})(withRouter(App));

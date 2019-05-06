@@ -6,7 +6,6 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class UserDataLangComponent extends Component {
   render() {
-    console.log(this.props.languages)
     const keys = Object.keys(this.props.languages);
     const values = Object.values(this.props.languages);
 
@@ -28,9 +27,7 @@ class UserDataLangComponent extends Component {
         dataPoints: holder
       }]
     }
-    console.log(options)
     return (
-      
       <div className='langComponent'>
         <CanvasJSChart options={options} />
       </div>

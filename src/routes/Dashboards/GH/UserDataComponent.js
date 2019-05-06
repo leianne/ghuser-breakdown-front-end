@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import UserDataChartComponent from "./UserDataChartComponent";
 
 function UserDataComponent(props) {
-    console.log(props)
   if (props.data) {
     return (
       <Card className="userData">

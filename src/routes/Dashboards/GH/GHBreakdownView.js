@@ -8,7 +8,7 @@ import UserDataChartComponent from './UserDataChartComponent';
 import UserDataLangComponent from './UserDataLangComponent';
 import './GHBreakdownStyles.css'
 
-const  baseURL =  process.env.BACKEND_API || 'http://localhost:5000/api/github/search'
+const  baseURL =  process.env.BACKEND_API || 'http://localhost:5000/'
 
 class GHBreakdownView extends Component {
     state  =  {
@@ -24,7 +24,7 @@ class GHBreakdownView extends Component {
             isCommitsLoading: true,
             isLangLoading: true
         })
-        axios.post(`${baseURL}/commits`, user)
+        axios.post(`${baseURL}api/github/search/commits`, user)
         .then(res => 
             this.setState({
             ...this.state,
@@ -32,7 +32,7 @@ class GHBreakdownView extends Component {
             commits: res.data.data
         }))
         .catch(err => console.log(err))
-        axios.post(`${baseURL}/languages`, user)
+        axios.post(`${baseURL}api/github/search/languages`, user)
             .then(res => this.setState({
                 ...this.state,
                 isLangLoading: false,
@@ -40,7 +40,7 @@ class GHBreakdownView extends Component {
             }))
             .catch(err => console.log(err))
         if(Object.keys(this.state.userInfo).length == 0) {
-            axios.post(`${baseURL}/user`, user)
+            axios.post(`${baseURL}api/github/search/user`, user)
             .then(res => {
                 this.setState({
                 ...this.state,
@@ -51,7 +51,6 @@ class GHBreakdownView extends Component {
     }
 
     render() {
-        console.log(this.state)
         if(this.state.userInfo.login === ''){
             return (
                 <div className='loader'><Loader type="ThreeDots" color="#4051B5" height={80} width={80} /></div>

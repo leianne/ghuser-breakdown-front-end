@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 function UsersSearch(props) {
-    console.log(props)
     if(props.users.length > 0) {
         return props.users.map(user => {
             return (

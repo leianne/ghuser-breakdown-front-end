@@ -20,7 +20,6 @@ const loginUser = (state = initialState, action) => {
             }
         case LOGIN_USER_SUCCESS:
             localStorage.setItem('jwt', action.payload);
-            console.log(action.payload)
             return {
                 ...state,
                 isLoggingIn: false,
