@@ -45,16 +45,6 @@ class SearchView extends Component {
             .catch(err => console.log(err))
         }
     }
-    // HANDLE GITHUB SUBMITTED
-    handleGHSubmitted = (e) => {
-        e.preventDefault();
-        const url = 'https://github.com/'
-        window.open(
-            `${url}${this.state.userInfo.login}`,
-        '_blank'
-        );
-    }
-  
     render() {
         return (
             <>

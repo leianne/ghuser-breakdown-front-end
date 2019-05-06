@@ -1,9 +1,16 @@
 import React from "react";
-import { LineChart } from "react-easy-chart";
+// import { LineChart, ScatterplotChart } from "react-easy-chart";
+// import ReactChartkick, { LineChart, PieChart } from 'react-chartkick';
+// import Chart from 'chart.js';
+import CanvasJSReact from '../../../canvasjs-2.3.1/canvasjs.react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import axios  from 'axios';
 const  baseURL = process.env.BACKEND_API || 'http://localhost:5000/api/github/search';
+
+const CanvasJS = CanvasJSReact.CanvasJS
+const CanvasJSChart = CanvasJSReact.CanvasJSChart
+
 
 class UserDataChartComponent extends React.Component {
   state = {
@@ -15,8 +22,8 @@ class UserDataChartComponent extends React.Component {
     Friday: [],
     Saturday: []
   };
-  componentWillReceiveProps() {
-    console.log(this.props)
+  componentDidUpdate() {
+
   }
   componentDidMount() {
     const Sunday = [];
@@ -59,10 +66,10 @@ class UserDataChartComponent extends React.Component {
         Thursday: Thursday,
         Friday: Friday,
         Saturday: Saturday,
-        selected: Wednesday
+        selected: Tuesday
       });
     }
-    console.log(this.state)
+    
   }
   tabSelected = (e) => {
       e.preventDefault();
@@ -72,12 +79,37 @@ class UserDataChartComponent extends React.Component {
       })
   }
   render() {
-    console.log(!this.props.data);
-    console.log(this.state)
-
+    const options = {
+      title: {
+        text: "Commit History"
+      },
+      axisX: {
+        title: "hour",
+        suffix: "",
+        stripLines: [{
+          value: 3366500,
+          label: "Average"
+        }]
+      },
+      axisY: {
+        title: "# of commit(s)",
+        suffix: "",
+        stripLines: [{
+          value: 3366500,
+          label: "Average"
+        }]
+      },
+      data: [{
+        
+        type: "spline",
+        dataPoints: this.state.selected
+      }]
+    }
+    
     if (this.state.selected) {
+    
       return (
-        <>
+        <div className='chartContainer'>
           <div>
             <Tabs    
 >
@@ -90,15 +122,12 @@ class UserDataChartComponent extends React.Component {
               <Tab onClick={(e) => this.tabSelected(e)} style={{ minWidth: 50 }} label="Saturday" />
             </Tabs>
           </div>
-          <LineChart
-            axes
-            axisLabels={{ x: "Time", y: "Num of Commits" }}
-            width={550}
-            height={300}
-            interpolate={"cardinal"}
-            data={[this.state.selected]}
-          />
-        </>
+          
+          <CanvasJSChart options = {options} />
+
+          {/* <LineChart data={[[new Date(), 5], ["2017-01-01 00:00:00 UTC", 7], [new Date(), 5], ["2017-01-01 00:10:00 UTC", 7]]}/> */}
+        
+        </div>
       );
     } else {
       return <h3>Please select a date</h3>;
