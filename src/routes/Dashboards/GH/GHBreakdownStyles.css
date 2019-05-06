@@ -13,6 +13,17 @@
     align-items: center;
 }
 
+.topChartComponent {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    overflow: hidden;
+}
 .userCard {
     width: 25%;
+}
+
+.pieChartContainer {
+    width: 30%;
+    padding: 27px;
 }

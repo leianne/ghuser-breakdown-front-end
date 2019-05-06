@@ -19,16 +19,23 @@ class GHBreakdownView extends Component {
     componentDidMount() {
         const parsed = queryString.parse(this.props.location.pathname);
         const user = {username: parsed['/ghdashboard/search']}
-        console.log(user)
-        axios.post(`${baseURL}/commits`, user)
-        .then(res => this.setState({
+        this.setState({
             ...this.state,
+            isCommitsLoading: true,
+            isLangLoading: true
+        })
+        axios.post(`${baseURL}/commits`, user)
+        .then(res => 
+            this.setState({
+            ...this.state,
+            isCommitsLoading: false,
             commits: res.data.data
         }))
         .catch(err => console.log(err))
         axios.post(`${baseURL}/languages`, user)
             .then(res => this.setState({
                 ...this.state,
+                isLangLoading: false,
                 languages: res.data.data
             }))
             .catch(err => console.log(err))
@@ -55,12 +62,11 @@ class GHBreakdownView extends Component {
                     <div className='topChartComponent'>
                         <UserInfoComponent  user={this.state.userInfo}/>
                         <div className='pieChartContainer'>
-                        {Object.keys(this.state.languages).length > 0 && <UserDataLangComponent languages={this.state.languages}/>}
+                        {Object.keys(this.state.languages).length > 0 ? <UserDataLangComponent languages={this.state.languages}/> : <div className='loader'><Loader type="ThreeDots" color="#4051B5" height={80} width={80} /></div>}
                         </div>
                     </div>
-                   
-                    {Object.keys(this.state.commits).length > 0 &&
-                    <UserDataChartComponent userInfo={this.state.userInfo} data={this.state.commits}/>}
+                    {Object.keys(this.state.commits).length > 0 ?
+                    <UserDataChartComponent userInfo={this.state.userInfo} data={this.state.commits}/> : <div className='loader'><Loader type="ThreeDots" color="#4051B5" height={80} width={80} /></div>}
                 </div>
             )
         }

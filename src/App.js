@@ -87,7 +87,7 @@ myAccountBtnClicked = (e) => {
       <>
       <Header myAccountBtnClicked={this.myAccountBtnClicked} headBtnSubmitted={this.headBtnSubmitted} logoutBtnClicked={this.logoutBtnClicked} formBtnClicked={this.formBtnClicked} isLoggedIn={this.state.isLoggedIn} isRegistering={this.state.isRegistering}/>
       <Route path='/login' render={props => (<LoginView formBtnSelected={this.formBtnSelected} {...props} isRegistering={this.state.isRegistering}/>)} />
-      <Route path='/search' render={props => (<SearchView userSelected={this.userSelected}/>)} />
+      <Route exact path='/' render={props => (<SearchView userSelected={this.userSelected}/>)} />
       <Route path='/ghdashboard' render={props => (<GHBreakdownView {...props} user={this.state.user}/>)} />
       </>
     );

@@ -14,6 +14,7 @@ export const registerUser = userInfo => dispatch => {
                     type: REGISTER_USER_SUCCESS, 
                     payload: res.data
                 })
+                window.location.href = '/'
             })
             .catch(err => console.log(err))
 }

@@ -13,14 +13,14 @@ function Header(props) {
         <AppBar position="static">
         <Toolbar id='toolbar'> 
           <Typography variant="h6" color="inherit" >
-          <IconButton color="inherit" aria-label="Menu">
+          <IconButton color="inherit" href='/'aria-label="Menu">
           <i className="fab fa-github-alt"></i> 
 
           </IconButton>
             Github User Breakdown
           </Typography>
     
-          {props.isLoggedIn ? ( <div><Button onClick={(e) => props.myAccountBtnClicked(e)} color="inherit">My Account</Button> <Button onClick={(e) => props.logoutBtnClicked(e)} color="inherit">Log Out</Button> </div>) : <Button onClick={(e) => props.formBtnClicked(e)} color="inherit">{props.isRegistering ? 'Login' : 'Register'}</Button>}
+          {props.isLoggedIn ? ( <div><Button href='/' color="inherit">Search</Button> <Button onClick={(e) => props.logoutBtnClicked(e)} color="inherit">Log Out</Button> </div>) : <Button onClick={(e) => props.formBtnClicked(e)} color="inherit">{props.isRegistering ? 'Login' : 'Register'}</Button>}
         </Toolbar>
       </AppBar>
         </>
