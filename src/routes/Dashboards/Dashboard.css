@@ -38,6 +38,10 @@
     width: 300px;
     margin: 10px;
 }
+.userCardSearch {
+    width: 250px;
+    margin: 10px;
+}
 .usersContainer {
     display: flex;
     justify-content: center;

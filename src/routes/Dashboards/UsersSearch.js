@@ -12,7 +12,7 @@ function UsersSearch(props) {
     if(props.users.length > 0) {
         return props.users.map(user => {
             return (
-                <Card key={user.id} className='userCard'>
+                <Card key={user.id} className='userCardSearch'>
                 <CardActionArea>
                   <CardMedia
                     component="img"

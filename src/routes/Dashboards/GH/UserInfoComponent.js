@@ -29,7 +29,7 @@ function UserInfoComponent(props) {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button onClick={(e) => {props.handleGHSubmitted(e)}} size="small" color="primary">
+            <Button  href={`https://github.com/${login}`}target="_blank" size="small" color="primary">
               Github
             </Button>
             <Button  disabled={email ? false : true} size="small" color="primary">
