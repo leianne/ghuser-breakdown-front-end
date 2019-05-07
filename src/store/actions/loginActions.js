@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseURL = process.env.BACKEND_API || 'http://localhost:5000/'
+const baseURL = 'https://peaceful-fjord-80447.herokuapp.com/';
 
 export const LOGIN_USER_START = 'LOGIN_USER_START';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';

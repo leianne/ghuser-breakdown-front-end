@@ -8,7 +8,7 @@ import UserDataChartComponent from './UserDataChartComponent';
 import UserDataLangComponent from './UserDataLangComponent';
 import './GHBreakdownStyles.css'
 
-const  baseURL =  process.env.BACKEND_API || 'http://localhost:5000/'
+const  baseURL =  'https://peaceful-fjord-80447.herokuapp.com/'
 
 class GHBreakdownView extends Component {
     state  =  {

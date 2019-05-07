@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner'
 import SearchComponent from './SearchComponent';
 import UsersSearch from './UsersSearch';
 import './Dashboard.css'
-const baseURL =  process.env.BACKEND_API || 'http://localhost:5000/';
+const baseURL =  'https://peaceful-fjord-80447.herokuapp.com/';
 class SearchView extends Component {
     // STATE
     state = {
