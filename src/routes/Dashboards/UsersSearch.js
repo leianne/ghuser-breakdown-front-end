@@ -38,7 +38,7 @@ function UsersSearch(props) {
             )
         })
     } else {
-       return <h1>Please enter a Github Username</h1>
+       return <h1>Please enter Github Username</h1>
     }  
 }
 
